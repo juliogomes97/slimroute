@@ -11,5 +11,6 @@
             "name": "juliogomes97"
         }
     ],
-    "minimum-stability": "stable"
+    "license": "proprietary",
+    "minimum-stability": "dev"
 }
