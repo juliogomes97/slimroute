@@ -1,0 +1,14 @@
+{
+    "name": "juliogomes26297/slim-route",
+    "description": "Simples MVC em PHP",
+    "autoload": {
+        "psr-4": {
+            "SlimRoute\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "juliogomes97"
+        }
+    ]
+}
