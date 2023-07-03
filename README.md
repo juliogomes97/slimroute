@@ -28,7 +28,7 @@ Aqui estou a dizer que quero uma parametro que seja uma numero
 $route->add('GET', '/utilizador/{user_id:[0-9]+}', \SlimRoute_Test\Controllers\UserController::class, 'get');
 ```
 
-# Adicionar uma pagina onde nenhuma rota for encontrada
+### Adicionar uma pagina onde nenhuma rota for encontrada
 
 O method fallback será chamado caso nenhumas das rotas forem encontradas.
 
