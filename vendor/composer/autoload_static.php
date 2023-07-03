@@ -9,11 +9,16 @@ class ComposerStaticInit245ca56f6577c90dd8426a63de3d53b8
     public static $prefixLengthsPsr4 = array (
         'S' => 
         array (
+            'SlimRoute_Test\\' => 15,
             'SlimRoute\\' => 10,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
+        'SlimRoute_Test\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/test',
+        ),
         'SlimRoute\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',

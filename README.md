@@ -1,6 +1,6 @@
 ## SlimRoute
 
-O SlimRoute é um pequeno sistema de rotas
+O SlimRoute é um pequeno e simples sistema de rotas
 
 ### Como utilizar?
 
@@ -10,55 +10,36 @@ Primeiro de tudo iniciamos a class Route:
 $route = new Route;
 ```
 
-em seguida criamos um rota, aqui vou mostrar um exemplo de como criamos uma rota, neste caso será para pagina inicial da aplicação:
+### Criação de uma simples rota
 
-Ao criar uma rota, a função tem sempre o parametro ``` HttpRequest ```
-
-``` php
-$route->get('', function($request) {
-    echo 'Ola Mundo!';
-});
-```
-
-### Adicionar parametros na URL
-
-Neste exemplo mostro como podemos passar um parametro pela URL, o nome do parametro da URL tem que ser igual ao parametro da função como no exemplos abaixo:
+Neste caso abaixo, mostre uma rota para página inicial da aplicação
 
 ``` php
-$route->get('/utilizador/{id:[0-9]+}', function($request, $id) {
-    echo 'Utilizador ID: ' . $id;
-});
+// Iniciar o controlador LandingController como página inicial
+$route->get('', \SlimRoute_Test\Controllers\LandingController::class, 'hello');
 ```
 
-## Adicionar uma pagina onde nenhuma rota for encontrada
+### URL com parametros
 
-o method fallback será chamado caso nenhumas das rotas forem encontradas.
+Aqui estou a dizer que quero uma parametro que seja uma numero
 
 ``` php
-$route->fallback(function($request){
-    echo 'Página não encontrada!'
-});
+// Exemplo de buscar parametros na url
+$route->add('GET', '/utilizador/{user_id:[0-9]+}', \SlimRoute_Test\Controllers\UserController::class, 'get');
 ```
 
-## Outros exemplos
+# Adicionar uma pagina onde nenhuma rota for encontrada
 
-``` php
-$route->post('/utilizador/{user_id:[0-9]+}/posts', function($request, $user_id) {
-    echo json_encode([
-        'user_id'   => $user_id,
-        'posts'     => [
-            'Hello World',
-            'SlimRoute',
-            'Github'
-        ]
-    ]);
-});
-```
+O method fallback será chamado caso nenhumas das rotas forem encontradas.
 
 ``` php
-$route->get('/utilizador/{user_id:[0-9]+}/post/{post_name:[a-zA-Z]+}', function($request, $user_id, $post_name) {
-    echo 'Utilizador: ' . $user_id;
-    echo '<br>';
-    echo 'Postagem: ' . $post_name;
-});
+$route->fallback(\SlimRoute_Test\Controllers\NotFoundController::class, 'get');
 ```
+
+### Metodos
+
+O metodos existentes são os seguintes: ``` get() ```, ``` post() ```, ``` put() ```, ``` patch() ``` e ``` delete() ```.
+
+Todos esse metodos tem com parametros: 1º ``` uri ```, 2º ``` nome do controlador ```, 3º ``` nome do metodo ```.
+
+Caso queira adicionar outro tipo de http request method a rota é só chamar a função ``` add() ```, nesse metodo tem um parametro a mais que os outros anteriores: 1º ``` (GET, POST, ...) ```, 2º ``` uri ```, 3º ``` nome do controlador ```, 4º ``` nome do metodo ```;

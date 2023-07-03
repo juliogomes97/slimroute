@@ -15,7 +15,7 @@ class Route
         $this->httpRequest = new HttpRequest;
     }
 
-    public function call(string $method, string $uri, callable | string $callback) : void
+    public function add(string $method, string $uri, string $controller, string $handler) : void
     {
         if($this->found && $this->httpRequest->method !== $method)
             return;
@@ -27,27 +27,49 @@ class Route
         {
             $parameters = array_filter($matches, 'is_string', ARRAY_FILTER_USE_KEY);
 
-            $callback($this->httpRequest, ...$parameters);
+            $this->call($controller, $handler, $parameters);
 
             $this->found = true;
         }
     }
 
-    public function get(string $uri, callable | string $callback) : void
+    public function get(string $uri, string $controller, string $handler) : void
     {
-        $this->call('GET', $uri, $callback);
+        $this->add('GET', $uri, $controller, $handler);
     }
 
-    public function post(string $uri, callable | string $callback) : void
+    public function post(string $uri, string $controller, string $handler) : void
     {
-        $this->call('POST', $uri, $callback);
+        $this->add('POST', $uri, $controller, $handler);
     }
 
-    public function fallback(callable | string $callback) : void
+    public function put(string $uri, string $controller, string $handler) : void
+    {
+        $this->add('PUT', $uri, $controller, $handler);
+    }
+
+    public function patch(string $uri, string $controller, string $handler) : void
+    {
+        $this->add('PATCH', $uri, $controller, $handler);
+    }
+
+    public function delete(string $uri, string $controller, string $handler) : void
+    {
+        $this->add('DELETE', $uri, $controller, $handler);
+    }
+    
+    public function fallback(string $controller, string $handler) : void
     {
         if($this->found)
             return;
         
-        $callback($this->httpRequest);
+        $this->call($controller, $handler);
+    }
+
+    private function call(string $controller, string $handler, array $parameters = []) : void
+    {
+        $controller_object = new $controller($this->httpRequest);
+
+        $controller_object->{$handler}(...$parameters);
     }
 }

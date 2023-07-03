@@ -6,5 +6,6 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'SlimRoute_Test\\' => array($baseDir . '/test'),
     'SlimRoute\\' => array($baseDir . '/src'),
 );

@@ -1,9 +1,10 @@
 {
     "name": "juliogomes26297/slim-route",
-    "description": "Simples MVC em PHP",
+    "description": "SlimRoute é um pequeno e simples sistema de rotas",
     "autoload": {
         "psr-4": {
-            "SlimRoute\\": "src/"
+            "SlimRoute\\": "src/",
+            "SlimRoute_Test\\": "test/"
         }
     },
     "authors": [
@@ -11,6 +12,6 @@
             "name": "juliogomes97"
         }
     ],
-    "license": "proprietary",
+    "license": "Apache-2.0",
     "minimum-stability": "dev"
 }
