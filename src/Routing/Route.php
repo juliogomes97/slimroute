@@ -17,7 +17,7 @@ class Route
 
     public function add(string $method, string $uri, string $controller, string $handler) : void
     {
-        if($this->found && $this->httpRequest->method !== $method)
+        if($this->found || $this->httpRequest->method !== $method)
             return;
 
         $pattern = preg_replace('/\{(\w+):([^}]+)\}/', '(?P<$1>$2)', $uri);
