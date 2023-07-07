@@ -2,6 +2,8 @@
 
 O SlimRoute é um pequeno e simples sistema de rotas
 
+### [Exemplo ao vivo](https://arsenic-fighters.000webhostapp.com/)
+
 ### Como utilizar?
 
 Primeiro de tudo iniciamos a class Route:
